@@ -98,11 +98,48 @@
         </div>
       </div>
     </div>
+    <!-- faq -->
+    <div class="px-52 py-24">
+      <div class="flex flex-col items-center mx-auto">
+        <h3 class="text-2xl font-bold mb-7">frequently asked questions</h3>
+        <div v-for="faq in faqs" :key="faq.q" class="mt-5 bg-gray-200 w-4/5 max-w-[900px]">
+          <div class="flex bg-white py-4 justify-between items-center border-b border-red-500">
+            <h3 class="text-xl font-medium">{{ faq.q }}</h3>
+            <AkPlus class="text-3xl" />
+          </div>
+          <h4 class="px-4 py-2">{{ faq.a }}</h4>
+        </div>
+      </div>
+    </div>
+    <!-- reviews -->
+    <div class="bg-black px-52 py-24 text-white">
+      <div>
+        <h3 class="text-2xl flex items-center justify-center">Others service you might need</h3>
+        <div class="grid grid-cols-3 gap-8 mt-12">
+          <div
+            class="pb-4 h-48 rounded-md"
+            :class="colorRed"
+            v-for="service in services"
+            :key="service.title"
+          >
+            <h3 class="bg-white flex items-center justify-between text-xl px-4 py-4 text-black">
+              {{ service.title }} <CaChartNetwork class="font-bold" />
+            </h3>
+            <p class="p-4">{{ service.content }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import { AkPlus } from '@kalimahapps/vue-icons'
+// import { AnOutlinedClose } from "@kalimahapps/vue-icons";
+import { CaChartNetwork } from '@kalimahapps/vue-icons'
 export default {
+  name: 'HomePage',
+  components: { AkPlus, CaChartNetwork },
   data() {
     return {
       mainBtn: 'mainBtn',
@@ -175,6 +212,51 @@ export default {
         {
           title: 'Multi Unit Apartment'
         }
+      ],
+      faqs: [
+        {
+          q: 'What are the common closing costs associated with purchasing property',
+          a: 'Loan Origination Fee: This fee covers the administrative costs of processing the loan and is usually around 1% of the loan amount'
+        },
+        {
+          q: 'What is the eviction process if I fail to pay rent or violate the lease agreement?',
+          a: 'The eviction process varies by jurisdiction, but it usually involves the landlord providing notice to the tenant, giving them an opportunity to rectify the issue or vacate the property. If the tenant does not comply, the landlord may proceed with the eviction process through the court system.s'
+        },
+        {
+          q: 'What is a lease agreement',
+          a: 'A lease agreement is a written contract between the landlord and tenant that outlines the terms and conditions of the rental. It includes details such as the rental period, monthly rent, security deposit, maintenance responsibilities, and any rules or restrictions.'
+        },
+        {
+          q: "What is renter's insurance, and do I need it?",
+          a: "Renter's insurance is an insurance policy that provides coverage for a tenant's belongings and liability. While it is not legally required, it is highly recommended as it can protect your personal property in the event of theft, accidents, or natural disasters."
+        }
+      ],
+      services: [
+        {
+          title: 'Agricultural business',
+          content:
+            'We try as much as possible to discourage lazy asset ownership and as such provide our subscribers with properties that have the uniqueness of RENTAL INCOME'
+        },
+        {
+          title: 'Contract',
+          content:
+            'We try as much as possible to discourage lazy asset ownership and as such provide our subscribers with properties that have the uniqueness of RENTAL INCOME'
+        },
+        {
+          title: 'Networking',
+          content:
+            'We also network by creating and helping different individual skill & unskill labour for your job opportunities througout the nation.  providing you with the best'
+        },
+        {
+          title: 'E-commerce',
+          content:
+            'We cover up througout the nation without wasting time. True our expert disperse and connection with other logistics company.'
+        },
+        {
+          title: 'Crypto',
+          content:
+            'We cover up througout the nation without wasting time. True our expert disperse and connection with other logistics company.'
+        }
       ]
     }
   },
@@ -186,7 +268,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .mainBtn {
   background-color: red;
   padding: 10px 40px;

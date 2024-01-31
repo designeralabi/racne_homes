@@ -1,8 +1,14 @@
 @import './base.css';
 
-/* #app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  font-weight: normal;
+/* .router-link-active {
+  border-bottom: 1px solid red;
 } */
+
+.router-link-active::after {
+  content: '';
+  display: block;
+  width: 40px;
+  background-color: red;
+  height: 2px;
+  transition: all 1s ease-in-out;
+}

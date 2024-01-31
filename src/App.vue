@@ -1,6 +1,17 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
 import HeaderBanner from '@/components/HeaderBanner.vue'
+import racneLogo from './assets/racne_logo.png'
+import { AkChevronDown } from '@kalimahapps/vue-icons'
+import { ref } from 'vue'
+const mainBtn = ref('mainBtn')
+const nestedMenu = ref(false)
+function toggleAbout() {
+  nestedMenu.value = !nestedMenu.value
+  console.log('toggle button clicked')
+}
+
+// import FooterNavVue from './components/FooterNav.vue'
 </script>
 
 <template>
@@ -8,30 +19,34 @@ import HeaderBanner from '@/components/HeaderBanner.vue'
     <HeaderBanner />
     <main class="bg-black text-white">
       <nav class="container mx-auto px-24 py-7 flex items-center justify-between">
-        <div class="text-xl">Racnehomes</div>
+        <div class="text-xl flex items-center">
+          <img :src="racneLogo" alt="racne_logo" class="w-24" />
+          <h3>Racnehomes</h3>
+        </div>
         <!-- navlinks -->
         <div class="flex w-[514px] justify-between items-center">
           <RouterLink to="/">Home</RouterLink>
-          <RouterLink class="relative" to="/about"
-            >About
+          <RouterLink class="relative" to="/about">
+            About
+            <AkChevronDown
+              @click="toggleAbout"
+              class="text-white text-lg absolute right-0 -translate-y-5 translate-x-6"
+            />
             <ul
-              class="group-hover absolute top-12 w-[200px] flex-col z-30 bg-red-600 px-8 py-6 space-y-6 hidden"
+              class="group-hover flex absolute top-12 w-[200px] flex-col z-30 bg-red-600 px-8 py-6 space-y-6 transition"
+              :class="nestedMenu ? 'block' : 'hidden'"
             >
               <RouterLink class="" to="/about">Who we are</RouterLink>
               <RouterLink to="/about">What we do</RouterLink>
               <RouterLink to="/about">Vision & Mission</RouterLink>
               <RouterLink to="/about">Portfolio</RouterLink>
               <RouterLink to="/about">Our team</RouterLink>
-            </ul>
-          </RouterLink>
-
-          <RouterLink to="/about">About</RouterLink>
-          <RouterLink to="/about">About</RouterLink>
-          <h3
-            class="bg-red-600 ease-in-out transition-all hover:bg-red-700 rounded-full cursor-pointer px-8 py-2 capitalize font-bold"
+            </ul></RouterLink
           >
-            get in touch
-          </h3>
+
+          <RouterLink to="/about">Properties</RouterLink>
+          <RouterLink to="/about">Blog</RouterLink>
+          <h3 class="capitalize font-bold" :class="mainBtn">Contact us</h3>
         </div>
       </nav>
     </main>
@@ -40,66 +55,17 @@ import HeaderBanner from '@/components/HeaderBanner.vue'
   <RouterView />
 </template>
 
-<!-- <style scoped>
-header {
-  line-height: 1.5;
-  max-height: 100vh;
+<style scoped>
+.mainBtn {
+  background-color: red;
+  padding: 10px 40px;
+  border-radius: 8px;
+  color: whitesmoke;
+  cursor: pointer;
+  transition: all 1s ease-in-out;
 }
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+.mainBtn:hover {
+  background-color: rgb(214, 0, 0);
 }
-
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
-}
-</style> -->
+</style>
